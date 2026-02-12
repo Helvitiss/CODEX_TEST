@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+.venv/
+food_delivery.db
