@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useMemo, useState } from 'react';
+import type { ReactNode } from 'react';
 
 type AuthContextType = {
   token: string | null;
@@ -14,7 +15,7 @@ export const authTokenStore = {
   getToken: () => currentToken
 };
 
-export function AuthProvider({ children }: { children: React.ReactNode }) {
+export function AuthProvider({ children }: { children: ReactNode }) {
   const [token, setTokenState] = useState<string | null>(null);
 
   const setToken = useCallback((nextToken: string | null) => {
