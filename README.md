@@ -66,6 +66,18 @@ curl -X POST "http://localhost:8000/admin/dishes/1/image" \
 И доступны по URL:
 - `/media/dishes/<filename>`
 
+## CORS (frontend -> backend)
+
+По умолчанию backend разрешает origin:
+- `http://localhost:5173`
+- `http://127.0.0.1:5173`
+
+Переопределение через env:
+
+```env
+APP_CORS_ALLOW_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
+```
+
 ## Переменные и сборка
 
 - Backend собирается из `Dockerfile.backend`
