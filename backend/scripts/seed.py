@@ -5,6 +5,7 @@ from random import Random
 from sqlalchemy import select
 
 from app.core.database import AsyncSessionLocal, engine
+from app.core.schema import ensure_dishes_image_path_column
 from app.models import Base
 from app.models.menu import Category, Dish
 
@@ -47,6 +48,7 @@ ITEMS = [
 async def seed() -> None:
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
+        await ensure_dishes_image_path_column(conn)
 
     rng = Random(42)
 

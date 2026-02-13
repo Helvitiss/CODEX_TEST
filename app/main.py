@@ -12,6 +12,7 @@ from app.api.routers.orders import router as orders_router
 from app.core.config import settings
 from app.core.database import engine
 from app.core.exceptions import AppError
+from app.core.schema import ensure_dishes_image_path_column
 from app.models import Base
 
 app = FastAPI(title=settings.app_name)
@@ -21,6 +22,11 @@ app = FastAPI(title=settings.app_name)
 async def on_startup() -> None:
     async with engine.begin() as connection:
         await connection.run_sync(Base.metadata.create_all)
+        await ensure_dishes_image_path_column(connection)
+
+    media_root = Path(settings.media_root)
+    media_root.mkdir(parents=True, exist_ok=True)
+    (media_root / settings.dish_media_subdir).mkdir(parents=True, exist_ok=True)
 
     media_root = Path(settings.media_root)
     media_root.mkdir(parents=True, exist_ok=True)
