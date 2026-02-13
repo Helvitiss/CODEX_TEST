@@ -28,6 +28,10 @@ async def on_startup() -> None:
     media_root.mkdir(parents=True, exist_ok=True)
     (media_root / settings.dish_media_subdir).mkdir(parents=True, exist_ok=True)
 
+    media_root = Path(settings.media_root)
+    media_root.mkdir(parents=True, exist_ok=True)
+    (media_root / settings.dish_media_subdir).mkdir(parents=True, exist_ok=True)
+
 
 @app.exception_handler(AppError)
 async def app_error_handler(_: Request, exc: AppError):
