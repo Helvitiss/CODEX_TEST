@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -8,6 +10,8 @@ class Settings(BaseSettings):
     jwt_algorithm: str = "HS256"
     jwt_access_token_expire_minutes: int = 60 * 24
     otp_ttl_seconds: int = 300
+    media_root: Path = Path("backend/media")
+    dish_media_subdir: str = "dishes"
 
     model_config = SettingsConfigDict(env_file=".env", env_prefix="APP_")
 
