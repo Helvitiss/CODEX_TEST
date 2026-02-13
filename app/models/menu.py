@@ -22,5 +22,6 @@ class Dish(Base, TimestampMixin):
     description: Mapped[str] = mapped_column(Text)
     price: Mapped[Decimal] = mapped_column(Numeric(10, 2))
     is_available: Mapped[bool] = mapped_column(default=True, index=True)
+    image_path: Mapped[str | None] = mapped_column(String(500), nullable=True)
 
     category: Mapped[Category] = relationship()
