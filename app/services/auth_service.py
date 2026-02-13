@@ -17,6 +17,7 @@ class AuthService:
 
     async def request_otp(self, phone_number: str) -> int:
         code = generate_otp_code()
+        print(code)
         expires_at = datetime.now(UTC) + timedelta(seconds=settings.otp_ttl_seconds)
         await self.auth_repository.purge_phone_otps(phone_number)
         await self.auth_repository.create_otp(phone_number=phone_number, code=code, expires_at=expires_at)
