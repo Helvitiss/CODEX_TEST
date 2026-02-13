@@ -24,6 +24,7 @@ class DishCreate(BaseModel):
     description: str = Field(min_length=2)
     price: Decimal = Field(gt=0)
     is_available: bool = True
+    image_path: str | None = None
 
 
 class DishUpdate(BaseModel):
@@ -32,6 +33,7 @@ class DishUpdate(BaseModel):
     description: str | None = Field(default=None, min_length=2)
     price: Decimal | None = Field(default=None, gt=0)
     is_available: bool | None = None
+    image_path: str | None = None
 
 
 class DishRead(BaseModel):
@@ -41,5 +43,6 @@ class DishRead(BaseModel):
     description: str
     price: Decimal
     is_available: bool
+    image_path: str | None
 
     model_config = {"from_attributes": True}
