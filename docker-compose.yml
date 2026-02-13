@@ -1,0 +1,25 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: food-delivery-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend/media:/app/backend/media
+      - ./food_delivery.db:/app/food_delivery.db
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+      args:
+        VITE_API_URL: http://localhost:8000
+    container_name: food-delivery-frontend
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

@@ -55,5 +55,11 @@ class DishRepository:
         result = await self.session.execute(query)
         return list(result.scalars().all())
 
+
+    async def update_image_path(self, dish: Dish, image_path: str) -> Dish:
+        dish.image_path = image_path
+        await self.session.flush()
+        return dish
+
     async def delete(self, dish: Dish) -> None:
         await self.session.delete(dish)
